@@ -1,50 +1,59 @@
-const form = document.getElementById('todo-form');
-const input = document.getElementById('todo-input');
-const todoList = document.getElementById('todo-list');
+const taskInput = document.querySelector('.new-task');
+const addButton = document.querySelector('.add-button');
+const todoList = document.querySelector('.to-do-List');
 
-form.addEventListener('submit', function (event) {
-    event.preventDefault();
+function addTask() {
+    const taskText = taskInput.value.trim();
 
-    const taskText = input.value.trim();
     if (taskText === '') {
+        alert('Please set a goal for today!');
         return;
     }
 
-    addTodoItem(taskText);
-    input.value = '';
-});
+    const li = document.createElement('li');
 
-function addTodoItem(text) {
-    const listItem = document.createElement('li');
-    listItem.className = 'todo-item';
-
-    const leftSection = document.createElement('div');
-    leftSection.className = 'todo-left';
+    const leftPart = document.createElement('div');
+    leftPart.className = 'task-left'; 
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
+    checkbox.className = 'task-checkbox';
 
     const span = document.createElement('span');
-    span.textContent = text;
-    span.className = 'todo-text';
+    span.textContent = taskText;
+    span.className = 'task-text';
 
-    checkbox.addEventListener('change', function () {
-        span.classList.toggle('done');
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete-btn';
+    deleteBtn.innerHTML = '🗑️'; 
+
+    leftPart.appendChild(checkbox);
+    leftPart.appendChild(span);
+
+    li.appendChild(leftPart);
+    li.appendChild(deleteBtn);
+
+    todoList.appendChild(li);
+
+    taskInput.value = '';
+
+    checkbox.addEventListener('change', function() {
+        if (checkbox.checked) {
+            span.classList.add('done');
+        } else {
+            span.classList.remove('done');
+        }
     });
 
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.className = 'delete-btn';
-
-    deleteButton.addEventListener('click', function () {
-        todoList.removeChild(listItem);
+    deleteBtn.addEventListener('click', function() {
+        li.remove();
     });
-
-    leftSection.appendChild(checkbox);
-    leftSection.appendChild(span);
-
-    listItem.appendChild(leftSection);
-    listItem.appendChild(deleteButton);
-
-    todoList.appendChild(listItem);
 }
+
+addButton.addEventListener('click', addTask);
+
+taskInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        addTask();
+    }
+});

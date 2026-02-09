@@ -2,34 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Task2</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes Task2 To-do List</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel=stylesheet href="styles.css"> 
 </head>
 <body>
+    <div class="header-container">
+            <img src="icon.png" alt="Notes Logo" class="notes-logo">
+        <h1>Notes</h1>
+    </div>
 
-<header class="header">
-    <h1>ToDo List</h1>
-</header>
+    <div class="main-container"> 
+        <label>
+            <h1>My To-Do List</h1>
+        </label>
+        <main>
+            <div class ="input-section">
+                <input type = text class="new-task" placeholder="What you plan to do today?">
+                <button class = "add-button">add</button>
+            </div>
 
-<main class="container">
-    <form id="todo-form" class="todo-form">
-        <label for="todo-input">ToDo List</label>
-        <div class="input-group">
-            <input 
-                type="text" 
-                id="todo-input" 
-                placeholder="New Task" 
-                required
-            >
-            <button type="submit">Add</button>
-        </div>
-    </form>
+            <ul class="to-do-List">
+            </ul>
 
-    <ul id="todo-list" class="todo-list">
+        </main>
 
-    </ul>
-</main>
-
+    </div>
 <script src="script.js"></script>
 </body>
 </html>
